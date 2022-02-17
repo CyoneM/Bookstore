@@ -1,0 +1,23 @@
+﻿@{
+}
+
+@model BookListViewModel
+
+<h1>Welcome to the Chill Zone (Imagine TM symbol here)</h1>
+
+@foreach (Books b in Model.BookList)
+{
+    <h4>@b.Title</h4>
+    <h6 style="font-style: italic">@b.Author</h6>
+
+    <ul>
+        <li>ISBN: @b.Isbn</li>
+        <li>Publisher: @b.Publisher</li>
+        <li>Classification: @b.Classification</li>
+        <li>Category: @b.Category</li>
+        <li>Number of Pages: @b.PageCount</li>
+        <li>Price: @b.Price</li>
+    </ul>
+}
+
+<div page-blah="@Model.PageInfo" page-action="Index"></div>
