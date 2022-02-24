@@ -19,10 +19,13 @@ namespace Bookstore
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
 
         public IConfiguration Configuration { get; set; }
+
         public Startup(IConfiguration temp)
         {
             Configuration = temp;
         }
+
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
@@ -33,6 +36,11 @@ namespace Bookstore
             });
 
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
+
+            services.AddRazorPages();
+
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,12 +52,19 @@ namespace Bookstore
             }
 
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "Paging", 
+                    pattern: "Page{pageNum}", 
+                    defaults: new { Controller = "Home", action = "Index" });
+
                 endpoints.MapDefaultControllerRoute();
+
+                endpoints.MapRazorPages();
             });
         }
     }

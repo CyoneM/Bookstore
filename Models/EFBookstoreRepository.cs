@@ -14,6 +14,6 @@ namespace Bookstore.Models
             context = temp;
         }
 
-        public IQueryable<Books> BookList => context.BookList;
+        public IQueryable<Book> Books => context.Books;
     }
 }

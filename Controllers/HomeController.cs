@@ -1,10 +1,11 @@
-﻿using Bookstore.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Bookstore.Models;
 using Bookstore.Models.ViewModels;
+
 
 namespace Bookstore.Controllers
 {
@@ -17,20 +18,24 @@ namespace Bookstore.Controllers
             repo = temp;
         }
 
-        public IActionResult Index(int pageNum = 1)
+        public IActionResult Index(string category, int pageNum = 1)
         {
             int pageSize = 10;
 
-            var x = new BookListViewModel
+            var x = new BooksViewModel
             {
-                BookList = repo.BookList
+                Books = repo.Books
+                .Where(b => b.Category == category || category == null )
                 .OrderBy(b => b.Title)
                 .Skip((pageNum - 1) * pageSize)
                 .Take(pageSize),
 
                 PageInfo = new PageInfo
                 {
-                    TotalNumBooks = repo.BookList.Count(),
+                    TotalNumBooks = 
+                        (category == null 
+                        ? repo.Books.Count()
+                        : repo.Books.Where(x => x.Category == category).Count()),
                     BooksPerPage = pageSize,
                     CurrentPage = pageNum
                 }

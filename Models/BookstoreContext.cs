@@ -19,7 +19,7 @@ namespace Bookstore.Models
         {
         }
 
-        public virtual DbSet<Books> BookList { get; set; }
+        public DbSet<Book> Books { get; set; }
 
         
     }

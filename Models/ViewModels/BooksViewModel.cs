@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Bookstore.Models.ViewModels
 {
-    public class BookListViewModel
+    public class BooksViewModel
     {
-        public IQueryable<Books> BookList { get; set; }
+        public IQueryable<Book> Books { get; set; }
         public PageInfo PageInfo { get; set; }
     }
 }
