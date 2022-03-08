@@ -60,7 +60,7 @@ namespace Bookstore.Migrations
                     b.Property<int?>("BookId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("OrderDonationId")
+                    b.Property<int?>("OrderId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Quantity")
@@ -70,14 +70,14 @@ namespace Bookstore.Migrations
 
                     b.HasIndex("BookId");
 
-                    b.HasIndex("OrderDonationId");
+                    b.HasIndex("OrderId");
 
                     b.ToTable("CartLineItem");
                 });
 
             modelBuilder.Entity("Bookstore.Models.Order", b =>
                 {
-                    b.Property<int>("DonationId")
+                    b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -111,7 +111,7 @@ namespace Bookstore.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("DonationId");
+                    b.HasKey("OrderId");
 
                     b.ToTable("Orders");
                 });
@@ -124,7 +124,7 @@ namespace Bookstore.Migrations
 
                     b.HasOne("Bookstore.Models.Order", null)
                         .WithMany("Lines")
-                        .HasForeignKey("OrderDonationId");
+                        .HasForeignKey("OrderId");
                 });
 #pragma warning restore 612, 618
         }

@@ -11,7 +11,7 @@ namespace Bookstore.Models
     {
         [Key]
         [BindNever]
-        public int DonationId { get; set; }
+        public int OrderId { get; set; }
 
         [BindNever]
         public ICollection<CartLineItem> Lines { get; set; }
